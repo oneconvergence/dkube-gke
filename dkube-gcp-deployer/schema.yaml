@@ -1,0 +1,412 @@
+applicationApiVersion: v1beta1
+properties:
+  name:
+    type: string
+    x-google-marketplace:
+      type: NAME
+  namespace:
+    type: string
+    x-google-marketplace:
+      type: NAMESPACE
+  serviceAccount:
+    type: string
+    title: Cluster Admin Service Account
+    description: >-
+      Name of a service account in the target namespace that
+      has cluster-admin permissions.
+    x-google-marketplace:
+      type: SERVICE_ACCOUNT
+      serviceAccount:
+        roles:
+        - type: ClusterRole
+          rulesType: PREDEFINED
+          rulesFromRoleName: cluster-admin
+  dkubeInstallerImage:
+    type: string
+    default: $REGISTRY:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties: 
+          splitByColon:
+            before: dkube.image.repository
+            after: dkube.image.tag
+  d3apiImage:
+    type: string 
+    default: $REGISTRY/dkube-d3api:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:   
+          splitByColon: 
+            before: d3api.image.repository 
+            after: d3api.image.tag
+  d3waitImage:
+    type: string 
+    default: $REGISTRY/dkube-d3wait:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:   
+          splitByColon: 
+            before: d3wait.image.repository 
+            after: d3wait.image.tag
+  dfabproxyImage:
+    type: string 
+    default: $REGISTRY/dkube-dfabproxy:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon: 
+            before: dfabproxy.image.repository
+            after: dfabproxy.image.tag
+  d3extImage:
+    type: string 
+    default: $REGISTRY/dkube-d3ext:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon: 
+            before: d3ext.image.repository
+            after: d3ext.image.tag
+  d3UIServerImage:
+    type: string 
+    default: $REGISTRY/dkube-uiserver:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon: 
+            before: uiserver.image.repository
+            after: uiserver.image.tag
+  filebeatImage:
+    type: string 
+    default: $REGISTRY/dkube-filebeat:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon: 
+            before: filebeat.image.repository
+            after: filebeat.image.tag
+  logstashImage:
+    type: string 
+    default: $REGISTRY/dkube-logstash:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon: 
+            before: logstash.image.repository
+            after: logstash.image.tag
+  cadvisorImage:
+    type: string
+    default: $REGISTRY/cadvisor:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: cadvisor.image.repository
+            after: cadvisor.image.tag
+  nvidiaImage:
+    type: string
+    default: $REGISTRY/k8s-device-plugin:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: nvidia.image.repository
+            after: nvidia.image.tag
+  argoWorkflowControllerImage:
+    type: string
+    default: $REGISTRY/workflow-controller:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: argoWfController.image.repository
+            after: argoWfController.image.tag
+  prometheusAlertManagerImage:
+    type: string
+    default: $REGISTRY/alertmanager:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: alertmanager.image.repository
+            after: alertmanager.image.tag
+  prometheusOperatorImage:
+    type: string
+    default: $REGISTRY/prometheus-operator:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: prometheusOperator.image.repository
+            after: prometheusOperator.image.tag
+  ambassadorImage:
+    type: string
+    default: $REGISTRY/ambassador:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: ambassador.image.repository
+            after: ambassador.image.tag
+  minioImage:
+    type: string
+    default: $REGISTRY/minio:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: minio.image.repository
+            after: minio.image.tag
+  prometheusConfigReloaderImage:
+    type: string
+    default: $REGISTRY/prometheus-config-reloader:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: prometheusConfigReloader.image.repository
+            after: prometheusConfigReloader.image.tag
+  prometheusImage:
+    type: string
+    default: $REGISTRY/prometheus:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: prometheus.image.repository
+            after: prometheus.image.tag
+  etcdamd64Image:
+    type: string
+    default: $REGISTRY/etcd-amd64:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: etcd.image.repository
+            after: etcd.image.tag
+  grafanaImage:
+    type: string
+    default: $REGISTRY/grafana:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: grafana.image.repository
+            after: grafana.image.tag
+  kubeStateMetricsImage:
+    type: string
+    default: $REGISTRY/kube-state-metrics:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: kubeStateMetrics.image.repository
+            after: kubeStateMetrics.image.tag
+  prometheusNodeExporterImage:
+    type: string
+    default: $REGISTRY/node-exporter:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: nodeExporter.image.repository
+            after: nodeExporter.image.tag
+  hyperkubeImage:
+    type: string
+    default: $REGISTRY/hyperkube:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: hyperkube.image.repository
+            after: hyperkube.image.tag
+  grafanaWatcherImage:
+    type: string
+    default: $REGISTRY/grafana-watcher:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: grafanaWatcher.image.repository
+            after: grafanaWatcher.image.tag
+  addonResizeramd64Image:
+    type: string
+    default: $REGISTRY/addon-resizer-amd64:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: addonResizer.image.repository
+            after: addonResizer.image.tag
+  configmapReloadImage:
+    type: string
+    default: $REGISTRY/configmap-reload:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: configmapReload.image.repository
+            after: configmapReload.image.tag
+  nfsImage:
+    type: string
+    default: $REGISTRY/volume-nfs:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: nfs.image.repository
+            after: nfs.image.tag
+  tfOperatorImage:
+    type: string
+    default: $REGISTRY/tf_operator:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: tfOperator.image.repository
+            after: tfOperator.image.tag
+  dkubeTensorboardImage:
+    type: string
+    default: $REGISTRY/dkube-tensorboard:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: dkubeTensorboard.image.repository
+            after: dkubeTensorboard.image.tag
+  argoexecImage:
+    type: string
+    default: $REGISTRY/argoexec:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: argoexec.image.repository
+            after: argoexec.image.tag
+  dkubeTfServingCpuImage:
+    type: string
+    default: $REGISTRY/dkube-tfserving-cpu:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: dkubeTfServingCpu.image.repository
+            after: dkubeTfServingCpu.image.tag
+  dkubeTfServingGpuImage:
+    type: string
+    default: $REGISTRY/dkube-tfserving-gpu:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: dkubeTfServingGpu.image.repository
+            after: dkubeTfServingGpu.image.tag
+  datascienceTfGpuImage:
+    type: string
+    default: $REGISTRY/dkube-datascience-tf-gpu:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: datascienceTfGpu.image.repository
+            after: datascienceTfGpu.image.tag
+  datascienceTfCpuImage:
+    type: string
+    default: $REGISTRY/dkube-datascience-tf-cpu:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: datascienceTfCpu.image.repository
+            after: datascienceTfCpu.image.tag
+  ubbagentImage:
+    type: string
+    default: $REGISTRY/ubbagent:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: ubbagent.image.repository
+            after: ubbagent.image.tag
+  pollImage:
+    type: string
+    default: $REGISTRY/poll:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: poll.image.repository
+            after: poll.image.tag
+  dkubeOperatorGithubUsername:
+    type: string
+    title: Dkube operator github username
+    x-google-marketplace:
+      type: STRING
+  dkubeOperatorGithubToken:
+    title: Dkube operator github token
+    type: string
+    x-google-marketplace:
+      type: STRING
+  dkubeOperatorGithubOrganization:
+    title: Dkube operator github organization
+    type: string
+    x-google-marketplace:
+      type: STRING
+  dkubeOperatorGithubClientID:
+    title: Dkube operator github client-id
+    type: string
+    x-google-marketplace:
+      type: STRING
+  dkubeOperatorGithubClientSecret:
+    title: Dkube operator github client-secret
+    type: string
+    x-google-marketplace:
+      type: STRING
+  reportingSecret:
+    type: string
+    x-google-marketplace:
+      type: REPORTING_SECRET
+
+required:
+- name
+- namespace
+- dkubeOperatorGithubUsername
+- dkubeOperatorGithubToken
+- dkubeOperatorGithubOrganization
+- dkubeOperatorGithubClientID
+- dkubeOperatorGithubClientSecret
+- reportingSecret

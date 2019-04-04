@@ -1,0 +1,44 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: metering
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: "{{ .Release.Name }}"
+spec:
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: "{{ .Release.Name }}"
+    spec:
+      restartPolicy: OnFailure
+      serviceAccountName: {{ .Values.serviceAccount }}
+      containers:
+      - name: poll
+        image: {{ .Values.poll.image.repository}}:{{ .Values.poll.image.tag}}
+        env:
+        - name: PROM_NS
+          value: {{ .Release.Namespace }}
+        imagePullPolicy: Always
+      - name: ubbagent
+        image: {{ .Values.ubbagent.image.repository}}:{{ .Values.ubbagent.image.tag }}
+        imagePullPolicy: Always
+        env:
+        - name: AGENT_CONFIG_FILE
+          value: "/etc/ubbagent/config.yaml"
+        - name: AGENT_STATE_DIR
+          value: "/var/lib/ubbagent"
+        - name: AGENT_LOCAL_PORT
+          value: "3456"
+        {{ if .Values.reportingSecret }}
+        - name: GOOGLE_CONSUMER_ID
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.reportingSecret }}
+              key: consumer-id
+        - name: GOOGLE_REPORTING_KEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.reportingSecret }}
+              key: reporting-key
+        {{ end }}

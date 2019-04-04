@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: dkube
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: "{{ .Release.Name }}"
+spec:
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: "{{ .Release.Name }}"
+    spec:
+      restartPolicy: Never
+      containers:
+      - image: "{{ .Values.dkubeInstallerImage }}"
+        imagePullPolicy: Always
+        name: dkube
+        command: ["bash", "/opt/dkube/dkube_installer.sh"]
+        envFrom:
+        - configMapRef:
+            name: dkube-installer
+      serviceAccountName: {{ .Values.serviceAccount }}

@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dkube-installer
+  namespace: {{ .Release.Namespace }}
+data:
+  DKUBE_OPERATOR_GITHUB_USERNAME: {{ .Values.dkubeOperatorGithubUsername }}
+  DKUBE_OPERATOR_GITHUB_TOKEN: {{ .Values.dkubeOperatorGithubToken }}
+  DKUBE_OPERATOR_GITHUB_ORGANIZATION: {{ .Values.dkubeOperatorGithubOrganization }}
+  DKUBE_OPERATOR_TOKEN_SECRET: dkube-operator-token-secret
+  DKUBE_GITHUB_OAUTH_APP_CLIENT_ID: {{ .Values.dkubeOperatorGithubClientID }}
+  DKUBE_GITHUB_OAUTH_APP_CLIENT_SECRET: {{ .Values.dkubeOperatorGithubClientSecret }}
+  DKUBE_DOCKERHUB_CREDENTIALS_SECRET: dkube-dockerhub-secret
+  DKUBE_GITHUB_APP_SECRET: dkube-github-app-secret
+  DKUBE_OPERATOR_CERTIFICATE: dkube-certificate-secret
+  DKUBE_CLUSTERROLE: dkube-clusterrole
+  DKUBE_STORAGE_VOLUME: dkube-storage-volume
+  DKUBE_DB_VOLUME: dkube-db-volume
+  DKUBE_INSTALLER_VERSION: {{ .Release.Version }}
+  DKUBE_VERSION: {{ .Release.Version }}
+  PLATFORM: "gcp_marketplace"
+  DKUBE_NODE: ""
+  APPLICATION: {{ .Release.Name }}
+  INSTALLER_NAMESPACE: {{ .Release.Namespace }}
+  INSTALLER_SA: {{ .Values.serviceAccount }}
+  DKUBE_REPOSITORY: "{{ .Values.dkube.image.repository }}"
+  D3EXT_IMAGE: "{{ .Values.d3ext.image.repository }}"
+  D3API_IMAGE: "{{ .Values.d3api.image.repository }}"
+  D3WAIT_IMAGE: "{{ .Values.d3wait.image.repository }}"
+  DFABPROXY_IMAGE: "{{ .Values.dfabproxy.image.repository }}"
+  UISERVER_IMAGE: "{{ .Values.uiserver.image.repository }}"
+  FILEBEAT_IMAGE: "{{ .Values.filebeat.image.repository }}"
+  LOGSTASH_IMAGE: "{{ .Values.logstash.image.repository }}"
+  CADVISOR_IMAGE: "{{ .Values.cadvisor.image.repository }}"
+  NVIDIA_IMAGE: "{{ .Values.nvidia.image.repository }}"
+  ARGO_WF_CONTROLLER_IMAGE: "{{ .Values.argoWfController.image.repository }}"
+  ALERTMANAGER_IMAGE: "{{ .Values.alertmanager.image.repository }}"
+  PROMETHEUS_OPERATOR_IMAGE: "{{ .Values.prometheusOperator.image.repository }}"
+  AMBASSADOR_IMAGE: "{{ .Values.ambassador.image.repository }}"
+  MINIO_IMAGE: "{{ .Values.minio.image.repository }}"
+  PROMETHEUS_CONFIG_RELOADER_IMAGE: "{{ .Values.prometheusConfigReloader.image.repository }}"
+  PROMETHEUS_IMAGE: "{{ .Values.prometheus.image.repository }}"
+  ETCD_IMAGE: "{{ .Values.etcd.image.repository }}"
+  GRAFANA_IMAGE: "{{ .Values.grafana.image.repository }}"
+  KUBE_STATE_METRICS_IMAGE: "{{ .Values.kubeStateMetrics.image.repository }}"
+  PROMETHEUS_NODE_EXPORTER_IMAGE: "{{ .Values.nodeExporter.image.repository }}"
+  HYPERKUBE_IMAGE: "{{ .Values.hyperkube.image.repository }}"
+  GRAFANA_WATCHER_IMAGE: "{{ .Values.grafanaWatcher.image.repository }}"
+  ADDON_RESIZER_IMAGE: "{{ .Values.addonResizer.image.repository }}"
+  CONFIGMAP_RELOAD_IMAGE: "{{ .Values.configmapReload.image.repository }}"
+  NFS_IMAGE: "{{ .Values.nfs.image.repository }}"
+  TF_OPERATOR_IMAGE: "{{ .Values.tfOperator.image.repository }}"
+  TENSORBOARD_IMAGE: "{{ .Values.dkubeTensorboard.image.repository }}"
+  ARGO_EXEC_IMAGE: "{{ .Values.argoexec.image.repository }}"
+  DKUBE_TF_SERVING_CPU_IMAGE: "{{ .Values.dkubeTfServingCpu.image.repository }}"
+  DKUBE_TF_SERVING_GPU_IMAGE: "{{ .Values.dkubeTfServingGpu.image.repository }}"
+  DATASCIENCE_CPU_IMAGE: "{{ .Values.datascienceTfCpu.image.repository }}"
+  DATASCIENCE_GPU_IMAGE: "{{ .Values.datascienceTfGpu.image.repository }}"
