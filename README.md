@@ -41,6 +41,7 @@ Configure `kubectl` to talk to the new cluster.
 ```shell
 gcloud container clusters get-credentials "$CLUSTER" --zone "$ZONE"
 ```
+Assign cluster-admin role to the user
 ```shell
 kubectl create clusterrolebinding <rolebinding name> --clusterrole=cluster-admin --user=<userid>
 ```
