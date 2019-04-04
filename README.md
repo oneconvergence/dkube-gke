@@ -46,7 +46,7 @@ Assign cluster-admin role to the user
 kubectl create clusterrolebinding <rolebinding name> --clusterrole=cluster-admin --user=<userid>
 ```
 
-### Install google's dev tool
+#### Install google's dev tool
 ```shell
 docker pull gcr.io/cloud-marketplace-tools/k8s/dev
 ```
@@ -57,32 +57,32 @@ docker run \
   cat /scripts/dev > "$BIN_FILE"
 chmod +x "$BIN_FILE"
 
-### Install application crd:
+#### Install application crd:
 ```shell
 kubectl apply -f "https://raw.githubusercontent.com/GoogleCloudPlatform/marketplace-k8s-app-tools/master/crd/app-crd.yaml"
 ```
 
-### Create namespace:
+#### Create namespace:
 ```shell
 kubectl create namespace dkube
 ```
 
-### Generate license key 
-generate license key froom https://console.cloud.google.com/marketplace/kubernetes/config/dkube-public/dkube?version=1.0&project=dkube-public 
+#### Generate license key 
+generate license key  (https://console.cloud.google.com/marketplace/kubernetes/config/dkube-public/dkube?version=1.0&project=dkube-public )
 
 ```shell
 kubectl apply -f license.yaml 
 ```
-## Deploy Dkube
+### Deploy Dkube
 ```shell
 export REGISTRY=gcr.io/cloud-marketplace/dkube-public
 export APP_NAME=dkube
 
 mpdev /scripts/install   --deployer=$REGISTRY/$APP_NAME/deployer:1.0   --parameters='{"name": "dkube-deployment", "namespace": "dkube", "dkubeOperatorGithubUsername": "ocdkube", "dkubeOperatorGithubToken": "fd5645501e6875c2aa786905b5899734b0cb6b2b", "dkubeOperatorGithubOrganization": "oneconvergence", "dkubeOperatorGithubClientSecret": "0c2ebf0a72fa7daf23aad5730b441d221e9a5512", "dkubeOperatorGithubClientID": "727e542daff6a6dc683a", "reportingSecret": "<name of secret in license.yaml>"}'
  ``` 
-# Uninstall the Application
+## Uninstall the Application
 
-## Using GKE UI
+### Using GKE UI
 
 Navigate to `GKE > Applications` in GCP console. From the list of applications, click on the one that you wish to uninstall.
 
@@ -94,9 +94,9 @@ Namespace created for user is to be cleaned up manually using the below command:
 kubectl delete ns -l heritage=dkube
 ```
 
-## Using the command line
+### Using the command line
 
-### Prepare the environment
+#### Prepare the environment
 
 Set your installation name and Kubernetes namespace:
 
@@ -105,7 +105,7 @@ export APP_INSTANCE_NAME=<app-name>
 export NAMESPACE=<namespace>
 ```
 
-### Delete the resources
+#### Delete the resources
 ```shell
 Kubectl delete application $APP_INSTANCE_NAME -n $NAMESPACE
 kubectl delete ns -l heritage=dkube
