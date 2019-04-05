@@ -96,6 +96,10 @@ Namespace created for user is to be cleaned up manually using the below command:
 ```shell
 kubectl delete ns -l heritage=dkube
 ```
+```shell
+kubectl delete service alertmanager-operated prometheus-operated -n <namespace>
+kubectl delete crd alertmanagers.monitoring.coreos.com prometheuses.monitoring.coreos.com prometheusrules.monitoring.coreos.com servicemonitors.monitoring.coreos.com
+```
 
 ### Using the command line
 
@@ -113,7 +117,10 @@ export NAMESPACE=<namespace>
 Kubectl delete application $APP_INSTANCE_NAME -n $NAMESPACE
 kubectl delete ns -l heritage=dkube
 ```
-
+```shell
+kubectl delete service alertmanager-operated prometheus-operated -n <namespace>
+kubectl delete crd alertmanagers.monitoring.coreos.com prometheuses.monitoring.coreos.com prometheusrules.monitoring.coreos.com servicemonitors.monitoring.coreos.com
+```
 
 
 
