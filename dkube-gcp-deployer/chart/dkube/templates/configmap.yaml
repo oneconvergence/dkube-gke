@@ -16,8 +16,8 @@ data:
   DKUBE_CLUSTERROLE: dkube-clusterrole
   DKUBE_STORAGE_VOLUME: dkube-storage-volume
   DKUBE_DB_VOLUME: dkube-db-volume
-  DKUBE_INSTALLER_VERSION: {{ .Release.Version }}
-  DKUBE_VERSION: {{ .Release.Version }}
+  DKUBE_INSTALLER_VERSION: "1.0"
+  DKUBE_VERSION: "1.0"
   PLATFORM: "gcp_marketplace"
   DKUBE_NODE: ""
   APPLICATION: {{ .Release.Name }}
