@@ -14,7 +14,6 @@ Deploy dkube to Google Kubernetes Engine using Google Cloud Marketplace, by foll
 You'll need the following tools:
 - [gcloud](https://cloud.google.com/sdk/gcloud/)
 - [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/)
-- [Helm](https://github.com/kubernetes/helm/blob/master/docs/install.md)
 - [docker](https://docs.docker.com/install/)
 
 
