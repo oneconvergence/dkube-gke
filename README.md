@@ -11,12 +11,12 @@ Deploy dkube to Google Kubernetes Engine using Google Cloud Marketplace, by foll
 
 #### Set up command-line tools
 
-You'll need the following tools in your development environment:
+You'll need the following tools:
 - [gcloud](https://cloud.google.com/sdk/gcloud/)
 - [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/)
 - [Helm](https://github.com/kubernetes/helm/blob/master/docs/install.md)
 - [docker](https://docs.docker.com/install/)
-- [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+
 
 Make sure you follow the Linux post-install instruction to enable running docker as non-root
 
