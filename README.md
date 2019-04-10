@@ -67,7 +67,7 @@ kubectl apply -f "https://raw.githubusercontent.com/GoogleCloudPlatform/marketpl
 
 #### Create namespace:
 ```shell
-kubectl create namespace dkube
+kubectl create namespace <application namespace>
 ```
 
 #### Generate license key 
