@@ -41,11 +41,11 @@ This will bring up the Application Starting, then Application Details Screen
 
 The application will run for several minutes.  The progress can be reviewed by selecting the refresh button at the top of the screen.
 
-![](gcp-Marketplace/gcp-Refresh.png)
+![](images/gcp-Refresh.png)
 
 An error indication will appear during the installation saying "Some components have errors".  These errors should resolve themselves as the installation progresses.  After a few minutes, the installation will display success.
 
-![](gcp-Marketplace/gcp-Success.png)
+![](images/gcp-Success.png)
 
 If the installation does not show success after 10 minutes, do the cleanup routine (described below) and install again.
 
@@ -57,21 +57,21 @@ Still to be filled in...
 
 After the user is finished using DKube, the application should be deleted to free up resources for a new installation.  This is done from the Application screen.  Select the application to be deleted, and select the Delete button.
 
-![](gcp-Marketplace/gcp-Delete.png)
+![](images/gcp-Delete.png)
 
 ### Namespace Cleanup
 
 After deleting the application, the namespace needs to be deleted as well.  This is initiated from the Cluster screen.  Find the cluster name used in the installation, and connect to it.
 
-![](gcp-Marketplace/gcp-Cluster.png)
+![](images/gcp-Cluster.png)
 
 Select "Run in Cloud Shell"
 
-![](gcp-Marketplace/gcp-Connect.png)
+![](images/gcp-Connect.png)
 
 Get a list of the namespaces using kubectl command "kubectl get ns".  Find the namespace in the list and delete it by running "kubectl delete ns [xxx]".
 
-![](gcp-Marketplace/gcp-Cleanup.png)
+![](images/gcp-Cleanup.png)
 
 
 
