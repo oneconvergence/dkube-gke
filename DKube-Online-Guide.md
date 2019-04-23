@@ -9,9 +9,10 @@ Deploy DKube to Google Kubernetes Engine using the Google Cloud Marketplace, by 
 
 ### Initial Screen
 
-Select "Configure" to start installation procedure.
+* Select your Purchase Plan
+* Select "Configure" to start installation procedure.
 
-![](gcp-Marketplace/gcp-Configure.png)
+![](images/gcp-Configure.png)
 
 This will take you to the "New DKube Deployment" screen.
 
