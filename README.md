@@ -17,8 +17,6 @@ You'll need the following tools:
 - [docker](https://docs.docker.com/install/)
 
 
-Make sure you follow the Linux post-install instruction to enable running docker as non-root
-
 Configure `gcloud` as a Docker credential helper:
 
 ```shell
@@ -41,9 +39,12 @@ Configure `kubectl` to talk to the new cluster.
 ```shell
 gcloud container clusters get-credentials "$CLUSTER" --zone "$ZONE"
 ```
-Assign cluster-admin role to the user
+#### Prerequisites for using Role-Based Access Control
+You must grant your user the ability to create roles in Kubernetes by running the following command.
 ```shell
-kubectl create clusterrolebinding <rolebinding name> --clusterrole=cluster-admin --user=<userid>
+kubectl create clusterrolebinding <rolebinding name> \
+               --clusterrole=cluster-admin \
+               --user=$(gcloud config get-value account)
 ```
 
 
@@ -66,11 +67,24 @@ Add namespace to license.yaml
 kubectl apply -f license.yaml 
 ```
 ### Deploy Dkube
-```shell
-export REGISTRY=gcr.io/cloud-marketplace/dkube-public
-export APP_NAME=dkube
 
-mpdev /scripts/install   --deployer=$REGISTRY/$APP_NAME/deployer:1.0   --parameters='{"name": "dkube-deployment", "namespace": "dkube", "dkubeOperatorGithubUsername": "ocdkube", "dkubeOperatorGithubToken": "fd5645501e6875c2aa786905b5899734b0cb6b2b", "dkubeOperatorGithubOrganization": "oneconvergence", "dkubeOperatorGithubClientSecret": "0c2ebf0a72fa7daf23aad5730b441d221e9a5512", "dkubeOperatorGithubClientID": "727e542daff6a6dc683a", "reportingSecret": "<name of secret in license.yaml>"}'
+#### Clone the repository
+
+```shell
+git clone https://github.com/oneconvergence/dkube-gke.git
+```
+
+#### Pull deployer image
+
+```shell
+docker pull gcr.io/cloud-marketplace/dkube-public/dkube/deployer:1.1
+```
+
+#### Run installer script
+```shell
+cd dkube-gke
+
+sudo scripts/mpdev scripts/install --deployer=gcr.io/cloud-marketplace/dkube-public/dkube/deployer:1.1 --parameters='{"name": "dkube-deployment", "namespace": "dkube-2", "dkubeUsername": "akhila", "dkubePassword": "akhila123", "reportingSecret": "dkube", "storageClass": "standard"}'
  ``` 
 ## Uninstall the Application
 
@@ -81,15 +95,6 @@ Navigate to `GKE > Applications` in GCP console. From the list of applications, 
 On the new screen, click on the `Delete` button located in the top menu. It will remove
 the resources attached to this application.
 
-Namespace created for user is to be cleaned up manually using the below command:
-```shell
-kubectl delete ns -l heritage=dkube
-```
-```shell
-kubectl delete service alertmanager-operated prometheus-operated nfs-server -n <namespace>
-kubectl delete crd alertmanagers.monitoring.coreos.com prometheuses.monitoring.coreos.com prometheusrules.monitoring.coreos.com servicemonitors.monitoring.coreos.com
-kubectl delete deploy nfs-server -n <namespace>
-```
 
 ### Using the command line
 
@@ -105,13 +110,8 @@ export NAMESPACE=<namespace>
 #### Delete the resources
 ```shell
 Kubectl delete application $APP_INSTANCE_NAME -n $NAMESPACE
-kubectl delete ns -l heritage=dkube
 ```
-```shell
-kubectl delete service alertmanager-operated prometheus-operated nfs-server -n <namespace>
-kubectl delete crd alertmanagers.monitoring.coreos.com prometheuses.monitoring.coreos.com prometheusrules.monitoring.coreos.com servicemonitors.monitoring.coreos.com
-kubectl delete deploy nfs-server -n <namespace>
-```
+
 
 
 
