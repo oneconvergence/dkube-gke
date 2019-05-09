@@ -31,6 +31,16 @@ properties:
           splitByColon:
             before: dkube.image.repository
             after: dkube.image.tag
+  d3gcImage:
+    type: string
+    default: $REGISTRY/dkube-d3gc:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: d3gc.image.repository
+            after: d3gc.image.tag
   d3apiImage:
     type: string 
     default: $REGISTRY/dkube-d3api:$TAG
@@ -111,16 +121,6 @@ properties:
           splitByColon:
             before: cadvisor.image.repository
             after: cadvisor.image.tag
-  nvidiaImage:
-    type: string
-    default: $REGISTRY/k8s-device-plugin:$TAG
-    x-google-marketplace:
-      type: IMAGE
-      image:
-        generatedProperties:
-          splitByColon:
-            before: nvidia.image.repository
-            after: nvidia.image.tag
   argoWorkflowControllerImage:
     type: string
     default: $REGISTRY/workflow-controller:$TAG
@@ -271,16 +271,6 @@ properties:
           splitByColon:
             before: configmapReload.image.repository
             after: configmapReload.image.tag
-  nfsImage:
-    type: string
-    default: $REGISTRY/volume-nfs:$TAG
-    x-google-marketplace:
-      type: IMAGE
-      image:
-        generatedProperties:
-          splitByColon:
-            before: nfs.image.repository
-            after: nfs.image.tag
   tfOperatorImage:
     type: string
     default: $REGISTRY/tf_operator:$TAG
@@ -331,26 +321,6 @@ properties:
           splitByColon:
             before: dkubeTfServingGpu.image.repository
             after: dkubeTfServingGpu.image.tag
-  datascienceTfGpuImage:
-    type: string
-    default: $REGISTRY/dkube-datascience-tf-gpu:$TAG
-    x-google-marketplace:
-      type: IMAGE
-      image:
-        generatedProperties:
-          splitByColon:
-            before: datascienceTfGpu.image.repository
-            after: datascienceTfGpu.image.tag
-  datascienceTfCpuImage:
-    type: string
-    default: $REGISTRY/dkube-datascience-tf-cpu:$TAG
-    x-google-marketplace:
-      type: IMAGE
-      image:
-        generatedProperties:
-          splitByColon:
-            before: datascienceTfCpu.image.repository
-            after: datascienceTfCpu.image.tag
   ubbagentImage:
     type: string
     default: $REGISTRY/ubbagent:$TAG
@@ -371,28 +341,23 @@ properties:
           splitByColon:
             before: poll.image.repository
             after: poll.image.tag
-  dkubeOperatorGithubUsername:
+  meteringHbImage:
     type: string
-    title: Dkube operator github username
+    default: $REGISTRY/metering-heartbeat:$TAG
+    x-google-marketplace:
+      type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: metering-heartbeat.image.repository
+            after: metering-heartbeat.image.tag
+  dkubeUsername:
+    type: string
+    title: Dkube operator username
     x-google-marketplace:
       type: STRING
-  dkubeOperatorGithubToken:
-    title: Dkube operator github token
-    type: string
-    x-google-marketplace:
-      type: STRING
-  dkubeOperatorGithubOrganization:
-    title: Dkube operator github organization
-    type: string
-    x-google-marketplace:
-      type: STRING
-  dkubeOperatorGithubClientID:
-    title: Dkube operator github client-id
-    type: string
-    x-google-marketplace:
-      type: STRING
-  dkubeOperatorGithubClientSecret:
-    title: Dkube operator github client-secret
+  dkubePassword:
+    title: Dkube operator password
     type: string
     x-google-marketplace:
       type: STRING
@@ -400,13 +365,17 @@ properties:
     type: string
     x-google-marketplace:
       type: REPORTING_SECRET
-
+  storageClass:
+    title: Storage class name for dkube storage
+    type: string
+    x-google-marketplace:
+      type: STORAGE_CLASS
+      storageClass:
+        type: SSD
 required:
 - name
 - namespace
-- dkubeOperatorGithubUsername
-- dkubeOperatorGithubToken
-- dkubeOperatorGithubOrganization
-- dkubeOperatorGithubClientID
-- dkubeOperatorGithubClientSecret
+- dkubeUsername
+- dkubePassword
 - reportingSecret
+- storageClass

@@ -10,18 +10,19 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: "{{ .Release.Name }}"
+        app: "billing-agent"
     spec:
       restartPolicy: OnFailure
       serviceAccountName: {{ .Values.serviceAccount }}
       containers:
       - name: poll
-        image: {{ .Values.poll.image.repository}}:{{ .Values.poll.image.tag}}
+        image: {{ .Values.pollImage }}
         env:
         - name: PROM_NS
           value: {{ .Release.Namespace }}
         imagePullPolicy: Always
       - name: ubbagent
-        image: {{ .Values.ubbagent.image.repository}}:{{ .Values.ubbagent.image.tag }}
+        image: {{ .Values.ubbagentImage }}
         imagePullPolicy: Always
         env:
         - name: AGENT_CONFIG_FILE
@@ -42,3 +43,6 @@ spec:
               name: {{ .Values.reportingSecret }}
               key: reporting-key
         {{ end }}
+      - name: metering-heartbeat
+        image: {{ .Values.meteringHbImage }}
+        imagePullPolicy: Always
