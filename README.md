@@ -24,19 +24,6 @@ Configure `gcloud` as a Docker credential helper:
 ```shell
 gcloud auth configure-docker
 ```
-#### Install google's dev tool
-```shell
-docker pull gcr.io/cloud-marketplace-tools/k8s/dev
-```
-Below command creates an executable mpdev in your user bin directory. (Note: If there isn't already the bin directory in your home directory, you'll need to create it and add it to $PATH, or log out and log back in for it to be automatically added to $PATH.)
-
-```shell
-BIN_FILE="$HOME/bin/mpdev"
-docker run \
-  gcr.io/cloud-marketplace-tools/k8s/dev \
-  cat /scripts/dev > "$BIN_FILE"
-chmod +x "$BIN_FILE"
-```
 
 #### Create a Google Kubernetes Engine cluster
 
