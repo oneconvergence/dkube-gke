@@ -79,12 +79,32 @@ git clone https://github.com/oneconvergence/dkube-gke.git
 ```shell
 docker pull gcr.io/cloud-marketplace/dkube-public/dkube/deployer:1.1
 ```
+#### Set parameters
 
+```shell
+# set the application instance name
+export APP_INSTANCE_NAME=<application instance name>
+
+# set the Kubernetes namespace the application was originally installed
+export NAMESPACE=<namespace>
+
+# set dkube Operator Username
+export USERNAME=<username>
+
+# set dkube Operator Password
+export PASSWORD=<password>
+
+# set Storage class name
+export STORAGE_CLASS=standard
+
+# set Reporting secret name (Name of the secret created using licene.yaml)
+export REPORTING_SECRET=<reporting secret name>
+```
 #### Run installer script
 ```shell
 cd dkube-gke
 
-sudo scripts/mpdev scripts/install --deployer=gcr.io/cloud-marketplace/dkube-public/dkube/deployer:1.1 --parameters='{"name": "dkube-deployment", "namespace": "dkube-2", "dkubeUsername": "akhila", "dkubePassword": "akhila123", "reportingSecret": "dkube", "storageClass": "standard"}'
+sudo scripts/mpdev scripts/install --deployer=gcr.io/cloud-marketplace/dkube-public/dkube/deployer:1.1 --parameters='{"name": "'$APP_INSTANCE_NAME'", "namespace": "'$NAMESPACE'", "dkubeUsername": "'$USERNAME'", "dkubePassword": "'$PASSWORD'", "reportingSecret": "'$REPORTING_SECRET'", "storageClass": "'$STORAGE_CLASS'"}'
  ``` 
 ## Uninstall the Application
 
