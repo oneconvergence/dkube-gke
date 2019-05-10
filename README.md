@@ -59,7 +59,7 @@ kubectl create namespace <application namespace>
 ```
 
 #### Generate license key 
-generate license key  (https://console.cloud.google.com/marketplace/kubernetes/config/dkube-public/dkube?version=1.0&project=dkube-public )
+Generate license key  
 
 Add namespace to license.yaml
 
