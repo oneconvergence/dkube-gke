@@ -1,0 +1,75 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+spec:
+  entrypoint: start-inference
+  serviceAccountName: "{{workflow.namespace}}"
+  arguments:
+    parameters:
+    - name: container
+      value: ""
+    - name: model
+      value: ""
+    - name: tf-serving-url
+      value: ""
+    - name: node-port
+      value: ""
+
+  templates:
+  - name: start-inference
+    resource:
+      action: apply
+      #successCondition: ?
+      manifest: |
+        ---
+        apiVersion: v1
+        kind: Service
+        metadata:
+          name: "{{workflow.name}}"
+          namespace: "{{workflow.namespace}}"
+          ownerReferences:
+          - apiVersion: argoproj.io/v1alpha1
+            blockOwnerDeletion: true
+            kind: Workflow
+            name: "{{workflow.name}}"
+            uid: "{{workflow.uid}}"
+        spec:
+          ports:
+          - name: serve
+            port: 8000
+            protocol: TCP
+            targetPort: 8000
+            nodePort: {{workflow.parameters.node-port}}
+          selector:
+            app: "{{workflow.name}}-{{workflow.parameters.model}}"
+          type: NodePort
+        ---
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: "{{workflow.name}}"
+          namespace: "{{workflow.namespace}}"
+          ownerReferences:
+          - apiVersion: argoproj.io/v1alpha1
+            blockOwnerDeletion: true
+            kind: Workflow
+            name: "{{workflow.name}}"
+            uid: "{{workflow.uid}}"
+        spec:
+          replicas: 1
+          selector:
+            matchLabels:
+              app: "{{workflow.name}}-{{workflow.parameters.model}}"
+          template:
+            metadata:
+              labels:
+                app: "{{workflow.name}}-{{workflow.parameters.model}}"
+            spec:
+              imagePullSecrets:
+              - name: dkube-dockerhub-secret
+              containers:
+              - name: inference
+                image: "{{workflow.parameters.container}}"
+                imagePullPolicy: IfNotPresent
+                env:
+                - name: TF_SERVING_URL
+                  value: "{{workflow.parameters.tf-serving-url}}"
